@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Anomaly Prediction</title>
+</head>
+<body>
+    <h1>Anomaly Prediction</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="return_temp">Return Temp:</label>
+        <input type="number" step="0.01" name="return_temp" required><br>
+
+        <label for="outdoor_temp">Outdoor Temp:</label>
+        <input type="number" step="0.01" name="outdoor_temp" required><br>
+
+        <label for="relative_humidity">Relative Humidity:</label>
+        <input type="number" step="0.01" name="relative_humidity" required><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    {% if is_anomaly is not None %}
+    <h2>Prediction Result:</h2>
+    <p>
+        {% if is_anomaly == -1 %}
+        Anomaly
+        {% elif is_anomaly == 1 %}
+        Not Anomaly
+        {% else %}
+        Invalid Prediction
+        {% endif %}
+    </p>
+    {% endif %}
+    
+    <!-- Print the is_anomaly value -->
+    <p>is_anomaly value: {{ is_anomaly }}</p>
+</body>
+</html>
